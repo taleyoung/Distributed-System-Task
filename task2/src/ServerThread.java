@@ -1,14 +1,15 @@
 import java.net.*;
 import java.io.*;
+import java.util.concurrent.BlockingQueue;
 
 public class ServerThread extends Thread{
     DatagramSocket socket = null;
     DatagramPacket packet = null;
     byte[] data = null;
 
-    public ServerThread(byte[] data,DatagramSocket socket,DatagramPacket packet) {
+    public ServerThread(byte[] data, DatagramSocket socket, BlockingQueue<DatagramPacket> queue) {
         this.socket = socket;
-        this.packet = packet;
+        this.packet = queue.poll();
         interrupt();
         this.data = data;
     }
