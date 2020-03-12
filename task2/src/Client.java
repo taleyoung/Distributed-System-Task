@@ -26,6 +26,7 @@ public class Client{
             aSocket.receive(reply);
             System.out.println("客户端开始接收数据");
             System.out.println("客戶端收到服务器的reply："+new String(reply.getData()).trim());
+
         } catch (SocketException e){
             System.out.println("Socket: " + e.getMessage());
         } catch (IOException e){

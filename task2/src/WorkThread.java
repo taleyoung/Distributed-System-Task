@@ -2,16 +2,18 @@ import java.net.*;
 import java.io.*;
 import java.util.concurrent.BlockingQueue;
 
-public class ServerThread extends Thread{
+public class WorkThread extends Thread{
     DatagramSocket socket = null;
     DatagramPacket packet = null;
+    BlockingQueue<DatagramPacket> sendQueue = null;
     byte[] data = null;
 
-    public ServerThread(byte[] data, DatagramSocket socket, BlockingQueue<DatagramPacket> queue) {
+    public WorkThread(byte[] data, DatagramSocket socket, BlockingQueue<DatagramPacket> receiveQueue, BlockingQueue<DatagramPacket> sendQueue) {
         this.socket = socket;
-        this.packet = queue.poll();
+        this.packet = receiveQueue.poll();
         interrupt();
         this.data = data;
+        this.sendQueue = sendQueue;
     }
     public void run(){
         System.out.println("线程启动");
@@ -20,13 +22,8 @@ public class ServerThread extends Thread{
         InetAddress address = packet.getAddress();
         int port = packet.getPort();
         DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
-        try {
-            socket.send(packet);
-            System.out.println("服务器端数据发送完毕");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally{
-        }
+        sendQueue.add(packet);
+        System.out.println("WorkThread: sendQueue的size为" + sendQueue.size());
     }
     public synchronized int compute(byte[] data){
         String info = new String(data);
