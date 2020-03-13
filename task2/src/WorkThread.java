@@ -1,5 +1,4 @@
 import java.net.*;
-import java.io.*;
 import java.util.concurrent.BlockingQueue;
 
 public class WorkThread extends Thread{
@@ -8,16 +7,16 @@ public class WorkThread extends Thread{
     BlockingQueue<DatagramPacket> sendQueue = null;
     byte[] data = null;
 
-    public WorkThread(byte[] data, DatagramSocket socket, BlockingQueue<DatagramPacket> receiveQueue, BlockingQueue<DatagramPacket> sendQueue) {
+    public WorkThread( DatagramSocket socket, BlockingQueue<DatagramPacket> receiveQueue, BlockingQueue<DatagramPacket> sendQueue) {
         this.socket = socket;
         this.packet = receiveQueue.poll();
         interrupt();
-        this.data = data;
+        this.data = null;
         this.sendQueue = sendQueue;
     }
     public void run(){
         System.out.println("线程启动");
-        int res = compute(data);
+        int res = compute();
         data = String.valueOf(res).getBytes();
         InetAddress address = packet.getAddress();
         int port = packet.getPort();
@@ -25,8 +24,9 @@ public class WorkThread extends Thread{
         sendQueue.add(packet);
         System.out.println("WorkThread: sendQueue的size为" + sendQueue.size());
     }
-    public synchronized int compute(byte[] data){
-        String info = new String(data);
+    public synchronized int compute(){
+//        String info = new String(data);
+        String info = new String(packet.getData(),0,packet.getLength());
         String source[] = info.split(" ");
         System.out.println("服务端收到客戶端的信息："+source[1] + source[0] + source[2]);
         int res = 0;
