@@ -10,11 +10,11 @@ public class Server{
             LinkedBlockingQueue receiveQueue = new LinkedBlockingQueue();
             LinkedBlockingQueue sendQueue = new LinkedBlockingQueue();
 
-            SendThread sendThread = new SendThread(socket, sendQueue);
-            sendThread.start();
-
             ReceiveThread receiveThread = new ReceiveThread(socket, receiveQueue);
             receiveThread.start();
+
+            SendThread sendThread = new SendThread(socket, sendQueue);
+            sendThread.start();
 
             while(true){
                     for(int i = 0; i < 3; i++){

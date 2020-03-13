@@ -12,6 +12,7 @@ public class SendThread extends Thread{
         this.queue = queue;
     }
     public void run(){
+        System.out.println("发送线程开启");
         while(true){
             try {
                 if(queue.size() > 0){

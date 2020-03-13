@@ -15,7 +15,7 @@ public class WorkThread extends Thread{
         this.sendQueue = sendQueue;
     }
     public void run(){
-        System.out.println("线程启动");
+        System.out.println("工作线程启动");
         int res = compute();
         data = String.valueOf(res).getBytes();
         InetAddress address = packet.getAddress();

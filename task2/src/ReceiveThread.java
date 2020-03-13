@@ -12,6 +12,7 @@ public class ReceiveThread extends Thread{
     }
     public void run(){
         byte[] buffer = new byte[10];
+        System.out.println("接收线程开启");
         while(true){
             try {
                 DatagramPacket request = new DatagramPacket(buffer, buffer.length);
