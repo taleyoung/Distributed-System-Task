@@ -34,15 +34,23 @@ public class WorkThread extends Thread{
         switch (source[0]){
             case "+":
                 res = num1 + num2;
+                Server.addCount++;
+                System.out.println("正在处理第"+Server.addCount+"个加法运算");
                 break;
             case "-":
                 res = num1-num2;
+                Server.subCount++;
+                System.out.println("正在处理第" + Server.subCount + "个减法运算");
                 break;
             case "*":
                 res = num1 * num2;
+                Server.mulCount++;
+                System.out.println("正在处理第" + Server.mulCount + "个乘法运算");
                 break;
             case "/":
                 res = num1 / num2;
+                Server.divCount++;
+                System.out.println("正在处理第" + Server.divCount + "个除法运算");
                 break;
         }
         return res;

@@ -18,6 +18,8 @@ public class ReceiveThread extends Thread{
                 DatagramPacket request = new DatagramPacket(buffer, buffer.length);
                 socket.receive(request);
                 receiveQueue.put(request);
+                Server.count++;
+                System.out.println("====共处理了"+Server.count + "个运算====");
             } catch (IOException e) {
                 e.printStackTrace();
             }catch (InterruptedException e){

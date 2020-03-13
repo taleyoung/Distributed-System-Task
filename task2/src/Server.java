@@ -2,6 +2,11 @@ import java.net.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Server{
+    static int count=0;//访问数量
+    static int addCount=0;
+    static int subCount=0;
+    static int mulCount=0;
+    static int divCount=0;
     public static void main(String args[]){
         DatagramSocket socket = null;
         int serverPort = 6789;
