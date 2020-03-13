@@ -27,7 +27,9 @@ public class Server{
         } catch (SocketException e){
             System.out.println("Socket: " + e.getMessage());
         } finally {
-            if (socket != null) socket.close();
+            if (socket != null){
+                socket.close();
+            }
         }
     }
 }

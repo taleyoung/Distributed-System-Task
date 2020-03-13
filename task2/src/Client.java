@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Client{
     public static void main(String args[]){
-        DatagramSocket aSocket = null;
+        DatagramSocket socket = null;
 
         try {
             InetAddress host = InetAddress.getByName("127.0.0.1");
@@ -17,13 +17,13 @@ public class Client{
             byte[] m = userInput.getBytes();
 
             DatagramPacket request = new DatagramPacket(m, m.length, host, serverPort);
-            aSocket = new DatagramSocket();
-            aSocket.send(request);
+            socket = new DatagramSocket();
+            socket.send(request);
 
             System.out.println("客户端正在发送数据给服务器");
             byte[] buffer = new byte[10];
             DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-            aSocket.receive(reply);
+            socket.receive(reply);
             System.out.println("客户端开始接收数据");
             System.out.println("客戶端收到服务器的reply："+new String(reply.getData()).trim());
 
@@ -32,7 +32,7 @@ public class Client{
         } catch (IOException e){
             System.out.println("IO: " + e.getMessage());
         } finally {
-            if(aSocket != null) aSocket.close();
+            if(socket != null) socket.close();
         }
     }
 }
