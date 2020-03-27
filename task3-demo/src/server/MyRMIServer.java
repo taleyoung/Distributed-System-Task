@@ -4,6 +4,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import types.MyCalc;
+
 public class MyRMIServer {
     public static void main(String[] args) throws Exception {
 
@@ -15,7 +17,7 @@ public class MyRMIServer {
             System.out.println("Registering Calculator Object");
             registry.rebind(name, skeleton);
         } catch (Exception e) {
-            System.err.println("Exception:" + e);
+            System.err.println("Exception2:" + e);
             e.printStackTrace();
         }
     }

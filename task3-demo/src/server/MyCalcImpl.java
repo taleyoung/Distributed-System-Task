@@ -1,6 +1,7 @@
 package server;
 
 import java.rmi.RemoteException;
+import types.MyCalc;
 
 public class MyCalcImpl implements MyCalc {
 

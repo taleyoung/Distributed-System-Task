@@ -1,5 +1,7 @@
 package client;
 
+import types.MyCalc;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -15,7 +17,7 @@ public class MyRMIClient {
             int result = mycalc.add(5, 3);
             System.out.println("Result:" + result);
         } catch (Exception e) {
-            System.err.println("??? exception:");
+            System.err.println("??? exception:"+ e );
             e.printStackTrace();
         }
     }
